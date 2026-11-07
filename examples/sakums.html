@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mana lapa</title>
+
+  <!-- 1. VitalyCSS (bāze + JS komponentu stili vienā failā) -->
+  <link rel="stylesheet" href="../dist/vitaly.all.min.css">
+
+  <!-- 2. TAVAS KRĀSAS — pārraksti tikai to, ko vajag -->
+  <style>
+    :root {
+      --vitaly-pamata:       #1a6b4a;
+      --vitaly-pamata-gaiss: #2d9c6e;
+      --vitaly-pamata-tumss: #0f4a32;
+      --vitaly-akcents:      #e8a020;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="josla">
+    <a href="#" class="zīmols">Mana lapa</a>
+    <ul class="saraksts-nav">
+      <li><a href="#sakums" class="aktīvs">Sākums</a></li>
+      <li><a href="#par">Par mums</a></li>
+      <li><button class="poga poga--klusā poga--maza" data-v-tema>◐ Tēma</button></li>
+    </ul>
+  </nav>
+
+  <main class="saturs saturs--šaurs polst-xl" id="sakums">
+    <h1>Sveika, pasaule!</h1>
+    <p>Šī lapa izmanto <strong>VitalyCSS</strong>. Nospied pogu, lai redzētu komponentu bez rakstīta JavaScript.</p>
+
+    <div class="rinda atstarpe-m">
+      <button class="poga poga--pamata" data-v-logs="#sveiciens">Atvērt logu</button>
+      <button class="poga poga--kontūra" data-v-pazinojums="Darbojas!" data-v-veids="labi">Paziņojums</button>
+    </div>
+  </main>
+
+  <!-- Modālais logs -->
+  <div class="aizkars" id="sveiciens" aria-hidden="true">
+    <div class="logs">
+      <div class="logs__galvene">Sveiki!
+        <button class="aizvērt-poga" data-v-aizvert aria-label="Aizvērt">&times;</button>
+      </div>
+      <div class="logs__saturs"><p>Šis logs aizveras ar <kbd>Esc</kbd>, fona klikšķi vai pogu.</p></div>
+      <div class="logs__kājene"><button class="poga poga--pamata" data-v-aizvert>Sapratu</button></div>
+    </div>
+  </div>
+
+  <!-- 3. VitalyJS — pirms </body> -->
+  <script src="../dist/vitaly.min.js"></script>
+</body>
+</html>

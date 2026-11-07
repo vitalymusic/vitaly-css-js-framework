@@ -1,0 +1,291 @@
+/**
+ * VitalyCSS — JS komponentu stili (pievieno pēc vitaly.css)
+ * <link rel="stylesheet" href="vitaly.css">
+ * <link rel="stylesheet" href="vitaly-js.css">
+ */
+
+[hidden] { display: none !important; }
+
+/* ═══ TĒMAS PĀRSLĒGŠANA (data-tema uz <html>) ═══
+   Piezīme: šie bloki pārraksta neitrālās krāsas. Ja savam fonam/tekstam
+   esi licis citas vērtības, nokopē tās arī šeit. */
+:root[data-tema="tumša"] {
+  --vitaly-fons:          #111110;
+  --vitaly-fons-kartes:   #1c1c1a;
+  --vitaly-fons-klusums:  #252522;
+  --vitaly-teksts:        #f0ede8;
+  --vitaly-teksts-gaiss:  #a0a09a;
+  --vitaly-teksts-kluss:  #606058;
+  --vitaly-mala:          #2e2e2a;
+  --vitaly-mala-tumss:    #3e3e3a;
+  --vitaly-pamata-teksts: var(--vitaly-pamata-gaiss);
+  --vitaly-saite-virsma:  color-mix(in srgb, var(--vitaly-pamata-gaiss) 65%, #fff);
+}
+:root[data-tema="gaiša"] {
+  --vitaly-fons:          #f8f7f4;
+  --vitaly-fons-kartes:   #ffffff;
+  --vitaly-fons-klusums:  #efefec;
+  --vitaly-teksts:        #1c1c1e;
+  --vitaly-teksts-gaiss:  #6b6b70;
+  --vitaly-teksts-kluss:  #a0a0a5;
+  --vitaly-mala:          #d8d8d5;
+  --vitaly-mala-tumss:    #b0b0ac;
+  --vitaly-pamata-teksts: var(--vitaly-pamata);
+  --vitaly-saite-virsma:  var(--vitaly-pamata-tumss);
+}
+
+/* ═══ MODĀLIE LOGI (papildinājumi) ═══ */
+.logs--mazs   { max-width: 380px; }
+.logs--liels  { max-width: 860px; }
+.logs__saturs { max-height: 65vh; overflow-y: auto; }
+
+.aizvērt-poga {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; padding: 0;
+  background: none; border: 0; border-radius: 50%;
+  font-size: 1.5rem; line-height: 1;
+  color: var(--vitaly-teksts-gaiss); cursor: pointer;
+  transition: background var(--vitaly-pāreja), color var(--vitaly-pāreja);
+}
+.aizvērt-poga:hover { background: var(--vitaly-fons-klusums); color: var(--vitaly-teksts); }
+
+.gaismas-kaste { cursor: zoom-out; background: rgba(0,0,0,0.88); }
+.gaismas-kaste img {
+  max-width: 92vw; max-height: 88vh; border-radius: var(--vitaly-noapaļ);
+  box-shadow: 0 10px 60px rgba(0,0,0,0.6);
+  transform: scale(.94); transition: transform .25s ease;
+}
+.gaismas-kaste.aizkars--atvērts img { transform: none; }
+
+/* ═══ NOLAIŽAMĀ IZVĒLNE ═══ */
+.nolaižamais { position: relative; display: inline-block; }
+.nolaižamais__izvēlne {
+  position: absolute; top: calc(100% + 6px); left: 0; min-width: 210px;
+  background: var(--vitaly-fons-kartes);
+  border: 1px solid var(--vitaly-mala);
+  border-radius: var(--vitaly-noapaļ);
+  box-shadow: var(--vitaly-ēna-l);
+  padding: .35rem; z-index: 150;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--vitaly-pāreja), transform var(--vitaly-pāreja), visibility var(--vitaly-pāreja);
+}
+.nolaižamais--atvērts .nolaižamais__izvēlne { opacity: 1; visibility: visible; transform: none; }
+.nolaižamais--pa-labi .nolaižamais__izvēlne { left: auto; right: 0; }
+.nolaižamais__izvēlne a,
+.nolaižamais__izvēlne button {
+  display: block; width: 100%; text-align: left;
+  padding: .5em .8em; border: 0; background: none;
+  font: inherit; font-size: .925rem; color: var(--vitaly-teksts);
+  text-decoration: none; border-radius: 4px; cursor: pointer;
+}
+.nolaižamais__izvēlne a:hover,
+.nolaižamais__izvēlne button:hover { background: var(--vitaly-fons-klusums); color: var(--vitaly-pamata-teksts); }
+.nolaižamais__dalītājs { height: 1px; margin: .35rem 0; background: var(--vitaly-mala); }
+
+/* ═══ CILNES ═══ */
+.cilnes__saraksts {
+  display: flex; gap: .25rem; overflow-x: auto;
+  border-bottom: 1px solid var(--vitaly-mala);
+}
+.cilne {
+  padding: .75em 1.1em; background: none; border: 0;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+  font: inherit; font-weight: 600; color: var(--vitaly-teksts-gaiss);
+  cursor: pointer; white-space: nowrap;
+  transition: color var(--vitaly-pāreja), border-color var(--vitaly-pāreja);
+}
+.cilne:hover { color: var(--vitaly-teksts); }
+.cilne.aktīvs { color: var(--vitaly-pamata-teksts); border-bottom-color: var(--vitaly-pamata); }
+.cilnes__panelis { padding: 1.25rem 0; animation: vitaly-parādīties .3s ease; }
+
+@keyframes vitaly-parādīties {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ═══ SAKĻAUJAMS + AKORDEONS ═══ */
+.sakļaujams > .sakļaujams__iekša { min-height: 0; overflow: hidden; }
+.v-js .sakļaujams {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .28s ease;
+}
+.v-js .sakļaujams--atvērts,
+.v-js .akordeons__vienība--atvērta > .sakļaujams { grid-template-rows: 1fr; }
+
+.akordeons {
+  background: var(--vitaly-fons-kartes);
+  border: 1px solid var(--vitaly-mala);
+  border-radius: var(--vitaly-noapaļ-l);
+  overflow: hidden;
+}
+.akordeons__vienība + .akordeons__vienība { border-top: 1px solid var(--vitaly-mala); }
+.akordeons__poga {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 1rem 1.25rem; background: none; border: 0;
+  font: inherit; font-weight: 600; text-align: left;
+  color: var(--vitaly-teksts); cursor: pointer;
+  transition: background var(--vitaly-pāreja);
+}
+.akordeons__poga:hover { background: var(--vitaly-fons-klusums); }
+.akordeons__poga::after {
+  content: ""; flex-shrink: 0; margin-left: 1rem;
+  width: .55rem; height: .55rem;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); transition: transform .25s ease;
+}
+.akordeons__vienība--atvērta > .akordeons__poga { color: var(--vitaly-pamata-teksts); }
+.akordeons__vienība--atvērta > .akordeons__poga::after { transform: rotate(-135deg); }
+.akordeons__saturs { padding: 0 1.25rem 1.25rem; color: var(--vitaly-teksts-gaiss); }
+
+/* ═══ PAZIŅOJUMI (TOAST) ═══ */
+.paziņojumu-vieta {
+  position: fixed; top: 1rem; right: 1rem; z-index: 500;
+  display: flex; flex-direction: column; gap: .6rem;
+  width: min(92vw, 380px);
+}
+.paziņojums {
+  display: flex; align-items: flex-start; gap: .8rem;
+  padding: .85rem 1rem;
+  background: var(--vitaly-fons-kartes); color: var(--vitaly-teksts);
+  border: 1px solid var(--vitaly-mala);
+  border-left: 4px solid var(--vitaly-info);
+  border-radius: var(--vitaly-noapaļ);
+  box-shadow: var(--vitaly-ēna-l); font-size: .925rem;
+  opacity: 0; transform: translateX(28px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.paziņojums.redzams { opacity: 1; transform: none; }
+.paziņojums > span { flex: 1; }
+.paziņojums--labi     { border-left-color: var(--vitaly-labi); }
+.paziņojums--uzmanies { border-left-color: var(--vitaly-uzmanies); }
+.paziņojums--briesmas { border-left-color: var(--vitaly-briesmas); }
+.paziņojums__aizvērt {
+  background: none; border: 0; padding: 0 .2rem;
+  font-size: 1.3rem; line-height: 1; color: var(--vitaly-teksts-kluss); cursor: pointer;
+}
+.paziņojums__aizvērt:hover { color: var(--vitaly-teksts); }
+.ziņa { transition: opacity .25s ease; }
+
+/* ═══ RĪKA PADOMS (tīrs CSS) ═══ */
+[data-v-padoms] { position: relative; }
+[data-v-padoms]::after {
+  content: attr(data-v-padoms);
+  position: absolute; bottom: calc(100% + 8px); left: 50%;
+  transform: translate(-50%, 4px);
+  padding: .35em .7em; border-radius: 4px;
+  background: var(--vitaly-teksts); color: var(--vitaly-fons);
+  font: 500 .78rem/1.3 var(--vitaly-fonts-sans); letter-spacing: 0; text-transform: none;
+  white-space: nowrap; pointer-events: none; z-index: 250;
+  opacity: 0; transition: opacity .15s ease, transform .15s ease;
+}
+[data-v-padoms]:hover::after,
+[data-v-padoms]:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+
+[data-v-padoms][data-v-vieta="apaksa"]::after { bottom: auto; top: calc(100% + 8px); transform: translate(-50%, -4px); }
+[data-v-padoms][data-v-vieta="apaksa"]:hover::after,
+[data-v-padoms][data-v-vieta="apaksa"]:focus-visible::after { transform: translate(-50%, 0); }
+
+[data-v-padoms][data-v-vieta="kreisi"]::after { bottom: auto; left: auto; top: 50%; right: calc(100% + 8px); transform: translate(4px, -50%); }
+[data-v-padoms][data-v-vieta="kreisi"]:hover::after,
+[data-v-padoms][data-v-vieta="kreisi"]:focus-visible::after { transform: translate(0, -50%); }
+
+[data-v-padoms][data-v-vieta="labi"]::after { bottom: auto; left: calc(100% + 8px); top: 50%; transform: translate(-4px, -50%); }
+[data-v-padoms][data-v-vieta="labi"]:hover::after,
+[data-v-padoms][data-v-vieta="labi"]:focus-visible::after { transform: translate(0, -50%); }
+
+/* ═══ SĀNPANELIS ═══ */
+.sānpanelis {
+  position: fixed; top: 0; bottom: 0; left: 0; z-index: 350;
+  width: min(86vw, 340px); padding: 1.5rem; overflow-y: auto;
+  background: var(--vitaly-fons-kartes); color: var(--vitaly-teksts);
+  box-shadow: var(--vitaly-ēna-l);
+  transform: translateX(-105%);
+  transition: transform .32s cubic-bezier(.2, .8, .2, 1);
+}
+.sānpanelis--pa-labi { left: auto; right: 0; transform: translateX(105%); }
+.sānpanelis--atvērts { transform: none; }
+.sānpaneļa-fons {
+  position: fixed; inset: 0; z-index: 340; background: rgba(0,0,0,.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.sānpaneļa-fons.redzams { opacity: 1; visibility: visible; }
+
+/* ═══ KARUSELIS ═══ */
+.karuselis { position: relative; overflow: hidden; border-radius: var(--vitaly-noapaļ-l); }
+.karuselis__josla { display: flex; transition: transform .55s cubic-bezier(.65, 0, .35, 1); }
+.karuselis__slaids { flex: 0 0 100%; min-width: 0; }
+.karuselis__iepr, .karuselis__nak {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%;
+  background: rgba(255,255,255,.88); color: #111;
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  transition: background var(--vitaly-pāreja), transform var(--vitaly-pāreja);
+}
+.karuselis__iepr { left: .8rem; }
+.karuselis__nak  { right: .8rem; }
+.karuselis__iepr:hover, .karuselis__nak:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.karuselis__punkti {
+  position: absolute; left: 0; right: 0; bottom: .8rem;
+  display: flex; justify-content: center; gap: .45rem;
+}
+.karuselis__punkti button {
+  width: .6rem; height: .6rem; padding: 0; border: 0; border-radius: 999px;
+  background: rgba(255,255,255,.55); cursor: pointer;
+  transition: width .25s ease, background .25s ease;
+}
+.karuselis__punkti button.aktīvs { width: 1.6rem; background: #fff; }
+
+/* ═══ PROGRESS / LASĪŠANAS JOSLA / UZ AUGŠU ═══ */
+.progresa-josla { height: .6rem; background: var(--vitaly-fons-klusums); border-radius: 999px; overflow: hidden; }
+.progresa-josla > span {
+  display: block; height: 100%; border-radius: inherit;
+  background: var(--vitaly-pamata); transition: width .4s ease;
+}
+.lasīšanas-josla {
+  position: fixed; top: 0; left: 0; z-index: 600;
+  height: 3px; width: 0; background: var(--vitaly-akcents);
+}
+.uz-augšu {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 300;
+  width: 2.8rem; height: 2.8rem; border: 0; border-radius: 50%;
+  background: var(--vitaly-pamata); color: #fff; font-size: 1.2rem; cursor: pointer;
+  box-shadow: var(--vitaly-ēna-l);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s ease, background var(--vitaly-pāreja);
+}
+.uz-augšu.redzams { opacity: 1; visibility: visible; transform: none; }
+.uz-augšu:hover { background: var(--vitaly-pamata-tumss); }
+
+/* ═══ PARĀDĪŠANĀS RITINOT + SLINKĀ IELĀDE ═══ */
+.v-js [data-v-paradit] {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+.v-js [data-v-paradit="kreisi"]  { transform: translateX(-32px); }
+.v-js [data-v-paradit="labi"]    { transform: translateX(32px); }
+.v-js [data-v-paradit="pieaugt"] { transform: scale(.92); }
+.v-js [data-v-paradit].parādīts  { opacity: 1; transform: none; }
+
+.v-js img[data-v-slinks] { opacity: 0; transition: opacity .5s ease; background: var(--vitaly-fons-klusums); }
+.v-js img[data-v-slinks].ielādēts { opacity: 1; }
+[data-v-gaisma] { cursor: zoom-in; }
+
+/* ═══ SCROLLSPY, TABULAS KĀRTOŠANA, PAROLE ═══ */
+[data-v-spiegs] a.aktīvs { color: var(--vitaly-pamata-teksts) !important; font-weight: 700; }
+
+[data-v-kartot] th { cursor: pointer; user-select: none; }
+[data-v-kartot] th:hover { color: var(--vitaly-pamata-teksts); }
+[data-v-kartot] th[aria-sort="ascending"]::after  { content: " ▲"; font-size: .7em; }
+[data-v-kartot] th[aria-sort="descending"]::after { content: " ▼"; font-size: .7em; }
+
+.ievades-grupa { position: relative; }
+.ievades-grupa .ievade { padding-right: 5rem; }
+.ievades-grupa__poga {
+  position: absolute; top: 50%; right: .4rem; transform: translateY(-50%);
+  padding: .3em .7em; background: var(--vitaly-fons-klusums);
+  border: 1px solid var(--vitaly-mala); border-radius: 4px;
+  font: inherit; font-size: .8rem; color: var(--vitaly-teksts-gaiss); cursor: pointer;
+}
+.ievades-grupa__poga:hover { color: var(--vitaly-pamata-teksts); border-color: var(--vitaly-pamata); }

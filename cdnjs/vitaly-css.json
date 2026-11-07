@@ -1,0 +1,37 @@
+{
+  "name": "vitaly-css",
+  "description": "Latviešu CSS ietvars ar krāsu mainīgajiem un JS komponentiem, kas darbojas tikai ar data atribūtiem. Nav atkarību.",
+  "keywords": [
+    "css",
+    "framework",
+    "latvian",
+    "ui",
+    "components",
+    "data-attributes",
+    "dark-mode",
+    "vanilla-js"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JUSU_LIETOTAJVARDS/vitaly-css.git"
+  },
+  "homepage": "https://github.com/JUSU_LIETOTAJVARDS/vitaly-css",
+  "author": {
+    "name": "Vitaly"
+  },
+  "filename": "vitaly.all.min.css",
+  "autoupdate": {
+    "source": "npm",
+    "target": "vitaly-css",
+    "fileMap": [
+      {
+        "basePath": "dist",
+        "files": [
+          "*.css",
+          "*.js"
+        ]
+      }
+    ]
+  }
+}

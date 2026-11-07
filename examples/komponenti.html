@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalyCSS + VitalyJS — Komponenti</title>
+  <link rel="stylesheet" href="../dist/vitaly.css">
+  <link rel="stylesheet" href="../dist/vitaly-js.css">
+  <style>
+    section.sadaļa { padding: 3rem 0; border-bottom: 1px solid var(--vitaly-mala); scroll-margin-top: 72px; }
+    .birka { font: 700 .75rem var(--vitaly-fonts-kods); letter-spacing: .12em; text-transform: uppercase; color: var(--vitaly-pamata-teksts); margin-bottom: .4rem; }
+    .paraugs { background: var(--vitaly-fons-klusums); border: 1px solid var(--vitaly-mala); border-radius: var(--vitaly-noapaļ); padding: var(--vitaly-attālums-l); margin-top: var(--vitaly-attālums-m); }
+    .slaids-saturs { height: 220px; display: flex; align-items: center; justify-content: center; color: #fff; font: 700 1.6rem var(--vitaly-fonts); }
+    .statistika { font: 700 2.6rem var(--vitaly-fonts); color: var(--vitaly-pamata-teksts); line-height: 1; }
+    .kods { background: #1c1c1e; color: #a8d8b0; padding: 1rem 1.25rem; border-radius: var(--vitaly-noapaļ); font: .82rem/1.6 var(--vitaly-fonts-kods); overflow-x: auto; margin-top: .8rem; white-space: pre; }
+    nav.josla .rinda { gap: .5rem; }
+  </style>
+</head>
+<body>
+
+<div class="lasīšanas-josla" data-v-lasisanas-progress></div>
+
+<!-- ═══ NAVIGĀCIJA ═══ -->
+<nav class="josla">
+  <a href="#" class="zīmols">VitalyCSS</a>
+  <ul class="saraksts-nav" data-v-spiegs>
+    <li><a href="#modals" data-v-ritinat="#modals">Modāls</a></li>
+    <li><a href="#izvelne" data-v-ritinat="#izvelne">Izvēlne</a></li>
+    <li><a href="#cilnes" data-v-ritinat="#cilnes">Cilnes</a></li>
+    <li><a href="#akordeons" data-v-ritinat="#akordeons">Akordeons</a></li>
+    <li><a href="#karuselis" data-v-ritinat="#karuselis">Karuselis</a></li>
+    <li><a href="#dati" data-v-ritinat="#dati">Dati</a></li>
+  </ul>
+  <div class="rinda rinda--centrā">
+    <button class="poga poga--klusā poga--maza" data-v-tema data-v-padoms="Gaišā / tumšā tēma" data-v-vieta="apaksa">◐ Tēma</button>
+    <button class="poga poga--pamata poga--maza" data-v-sanpanelis="#panelis">☰ Izvēlne</button>
+  </div>
+</nav>
+
+<!-- ═══ SĀNPANELIS ═══ -->
+<aside class="sānpanelis" id="panelis" aria-label="Sānpanelis">
+  <div class="rinda rinda--starp rinda--centrā mb-l">
+    <h4 style="margin:0">Sānpanelis</h4>
+    <button class="aizvērt-poga" data-v-aizvert aria-label="Aizvērt">&times;</button>
+  </div>
+  <div class="kaudze">
+    <a href="#modals" data-v-ritinat="#modals" data-v-aizvert="#panelis">→ Modālie logi</a>
+    <a href="#cilnes" data-v-ritinat="#cilnes" data-v-aizvert="#panelis">→ Cilnes</a>
+    <a href="#karuselis" data-v-ritinat="#karuselis" data-v-aizvert="#panelis">→ Karuselis</a>
+    <hr>
+    <button class="poga poga--kontūra poga--pilna" data-v-tema>Pārslēgt tēmu</button>
+  </div>
+</aside>
+
+<!-- ═══ HERO ═══ -->
+<header style="padding:4.5rem 0 3.5rem;background:var(--vitaly-fons-kartes);border-bottom:1px solid var(--vitaly-mala)">
+  <div class="saturs saturs--šaurs teksts-c">
+    <span class="nozīme nozīme--pamata mb-m" style="display:inline-flex">VitalyJS v1.0</span>
+    <h1 data-v-paradit>Komponenti bez rakstīšanas</h1>
+    <p data-v-paradit data-v-kave="120" style="font-size:1.2rem;color:var(--vitaly-teksts-gaiss)">
+      Tikai <code>data-v-*</code> atribūti. Nekāda JavaScript, nekādu atkarību.
+    </p>
+    <div class="režģis režģis--3 mt-l" style="gap:1rem">
+      <div data-v-paradit="pieaugt" data-v-kave="200"><div class="statistika" data-v-skaititajs="23">0</div><small>komponenti</small></div>
+      <div data-v-paradit="pieaugt" data-v-kave="320"><div class="statistika" data-v-skaititajs="4.6" data-v-sufikss=" KB">0</div><small>JS (gzip)</small></div>
+      <div data-v-paradit="pieaugt" data-v-kave="440"><div class="statistika" data-v-skaititajs="0">0</div><small>atkarības</small></div>
+    </div>
+  </div>
+</header>
+
+<main class="saturs">
+
+  <!-- ═══ MODĀLS ═══ -->
+  <section class="sadaļa" id="modals">
+    <p class="birka">data-v-logs</p>
+    <h2>Modālie logi</h2>
+    <div class="paraugs rinda rinda--ietīt">
+      <button class="poga poga--pamata" data-v-logs="#logs1">Atvērt logu</button>
+      <button class="poga poga--kontūra" data-v-logs="#logs2">Apstiprinājums</button>
+    </div>
+    <div class="kods">&lt;button data-v-logs="#manslogs"&gt;Atvērt&lt;/button&gt;
+&lt;div class="aizkars" id="manslogs"&gt;…&lt;button data-v-aizvert&gt;&times;&lt;/button&gt;…&lt;/div&gt;</div>
+
+    <div class="aizkars" id="logs1" aria-hidden="true">
+      <div class="logs">
+        <div class="logs__galvene">Sveiki!
+          <button class="aizvērt-poga" data-v-aizvert aria-label="Aizvērt">&times;</button>
+        </div>
+        <div class="logs__saturs">
+          <p>Šis logs aizveras ar <kbd>Esc</kbd>, klikšķi uz fona vai pogu. Fokuss paliek logā, bet pēc aizvēršanas atgriežas pie pogas.</p>
+          <div class="lauks"><label class="etiķete">Tavs vārds</label><input class="ievade" placeholder="Ieraksti šeit"></div>
+        </div>
+        <div class="logs__kājene">
+          <button class="poga poga--klusā" data-v-aizvert>Atcelt</button>
+          <button class="poga poga--pamata" data-v-aizvert data-v-pazinojums="Saglabāts!" data-v-veids="labi">Saglabāt</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="aizkars" id="logs2" data-v-statisks aria-hidden="true">
+      <div class="logs logs--mazs">
+        <div class="logs__saturs"><h4>Dzēst ierakstu?</h4><p class="teksts--kluss">Šo darbību nevar atsaukt. Logs neaizveras ar klikšķi uz fona.</p></div>
+        <div class="logs__kājene">
+          <button class="poga poga--klusā" data-v-aizvert>Nē</button>
+          <button class="poga poga--briesmas" data-v-aizvert data-v-pazinojums="Ieraksts dzēsts" data-v-veids="briesmas">Jā, dzēst</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOLAIŽAMĀ IZVĒLNE + PADOMI + TOAST ═══ -->
+  <section class="sadaļa" id="izvelne">
+    <p class="birka">data-v-nolaist · data-v-padoms · data-v-pazinojums</p>
+    <h2>Izvēlne, padomi, paziņojumi</h2>
+    <div class="paraugs rinda rinda--centrā rinda--ietīt">
+      <div class="nolaižamais">
+        <button class="poga poga--pamata" data-v-nolaist aria-haspopup="true" aria-expanded="false">Darbības ▾</button>
+        <div class="nolaižamais__izvēlne">
+          <a href="#">Rediģēt</a>
+          <a href="#">Dublēt</a>
+          <div class="nolaižamais__dalītājs"></div>
+          <button data-v-pazinojums="Arhivēts" data-v-veids="info">Arhivēt</button>
+          <button data-v-logs="#logs2">Dzēst…</button>
+        </div>
+      </div>
+
+      <button class="poga poga--klusā" data-v-padoms="Padoms augšā">Augšā</button>
+      <button class="poga poga--klusā" data-v-padoms="Padoms apakšā" data-v-vieta="apaksa">Apakšā</button>
+      <button class="poga poga--klusā" data-v-padoms="Pa labi" data-v-vieta="labi">Pa labi</button>
+
+      <button class="poga poga--akcents" data-v-pazinojums="Viss kārtībā!" data-v-veids="labi">Veiksme</button>
+      <button class="poga poga--kontūra" data-v-pazinojums="Pārbaudi laukus" data-v-veids="uzmanies">Brīdinājums</button>
+      <button class="poga poga--kontūra" data-v-pazinojums="Radās kļūda" data-v-veids="briesmas" data-v-ilgums="0">Kļūda (paliek)</button>
+    </div>
+  </section>
+
+  <!-- ═══ CILNES ═══ -->
+  <section class="sadaļa" id="cilnes">
+    <p class="birka">data-v-cilnes · data-v-cilne</p>
+    <h2>Cilnes</h2>
+    <div class="paraugs cilnes" data-v-cilnes>
+      <div class="cilnes__saraksts">
+        <button class="cilne aktīvs" data-v-cilne="#c1">Pārskats</button>
+        <button class="cilne" data-v-cilne="#c2">Iestatījumi</button>
+        <button class="cilne" data-v-cilne="#c3">Vēsture</button>
+      </div>
+      <div class="cilnes__panelis" id="c1"><p>Pārskata saturs. Pārslēdzies ar peli vai bultiņu taustiņiem ←/→.</p></div>
+      <div class="cilnes__panelis" id="c2"><p>Iestatījumu saturs.</p></div>
+      <div class="cilnes__panelis" id="c3"><p>Vēstures saturs.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ AKORDEONS + SAKĻAUJAMS ═══ -->
+  <section class="sadaļa" id="akordeons">
+    <p class="birka">data-v-akordeons · data-v-saklaut</p>
+    <h2>Akordeons un sakļaujams bloks</h2>
+    <div class="akordeons mt-m" data-v-akordeons data-v-viens>
+      <div class="akordeons__vienība akordeons__vienība--atvērta">
+        <button class="akordeons__poga" data-v-akordeons-poga>Kas ir VitalyCSS?</button>
+        <div class="sakļaujams"><div class="sakļaujams__iekša"><div class="akordeons__saturs">Viegls CSS ietvars ar latviskām klasēm un krāsu mainīgajiem.</div></div></div>
+      </div>
+      <div class="akordeons__vienība">
+        <button class="akordeons__poga" data-v-akordeons-poga>Kā nomainīt krāsas?</button>
+        <div class="sakļaujams"><div class="sakļaujams__iekša"><div class="akordeons__saturs">Pārraksti <code>--vitaly-pamata</code> un <code>--vitaly-akcents</code> savā <code>:root</code>.</div></div></div>
+      </div>
+      <div class="akordeons__vienība">
+        <button class="akordeons__poga" data-v-akordeons-poga>Vai vajag jQuery?</button>
+        <div class="sakļaujams"><div class="sakļaujams__iekša"><div class="akordeons__saturs">Nē. VitalyJS nav nekādu atkarību.</div></div></div>
+      </div>
+    </div>
+
+    <div class="paraugs mt-l">
+      <button class="poga poga--kontūra" data-v-saklaut="#vairak" aria-expanded="false">Rādīt vairāk</button>
+      <div class="sakļaujams" id="vairak"><div class="sakļaujams__iekša"><p class="mt-m">Šis ir atsevišķs sakļaujams bloks ārpus akordeona.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ KARUSELIS ═══ -->
+  <section class="sadaļa" id="karuselis">
+    <p class="birka">data-v-karuselis · data-v-gaisma · data-v-slinks</p>
+    <h2>Karuselis un attēli</h2>
+    <div class="karuselis mt-m" data-v-karuselis data-v-auto="4500">
+      <div class="karuselis__josla">
+        <div class="karuselis__slaids"><div class="slaids-saturs" style="background:linear-gradient(135deg,#1a6b4a,#2d9c6e)">Pirmais slaids</div></div>
+        <div class="karuselis__slaids"><div class="slaids-saturs" style="background:linear-gradient(135deg,#e8a020,#c0392b)">Otrais slaids</div></div>
+        <div class="karuselis__slaids"><div class="slaids-saturs" style="background:linear-gradient(135deg,#2980b9,#6c3483)">Trešais slaids</div></div>
+      </div>
+      <button class="karuselis__iepr" data-v-iepriekseja aria-label="Iepriekšējais">‹</button>
+      <button class="karuselis__nak" data-v-nakama aria-label="Nākamais">›</button>
+      <div class="karuselis__punkti"></div>
+    </div>
+
+    <p class="teksts--kluss mt-l mb-s">Slinki ielādēti attēli — klikšķini, lai palielinātu:</p>
+    <div class="režģis režģis--3">
+      <img class="karte" alt="Zaļš" width="400" height="260" data-v-gaisma
+           data-v-slinks="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 260'%3E%3Crect width='400' height='260' fill='%231a6b4a'/%3E%3Ccircle cx='200' cy='130' r='60' fill='%23e8a020'/%3E%3C/svg%3E">
+      <img class="karte" alt="Zils" width="400" height="260" data-v-gaisma
+           data-v-slinks="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 260'%3E%3Crect width='400' height='260' fill='%232980b9'/%3E%3Crect x='140' y='70' width='120' height='120' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
+      <img class="karte" alt="Sarkans" width="400" height="260" data-v-gaisma
+           data-v-slinks="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 260'%3E%3Crect width='400' height='260' fill='%23c0392b'/%3E%3Cpolygon points='200,50 260,200 140,200' fill='%23f5c05a'/%3E%3C/svg%3E">
+    </div>
+  </section>
+
+  <!-- ═══ DATI: TABULA, FORMAS, KOPĒT ═══ -->
+  <section class="sadaļa" id="dati">
+    <p class="birka">data-v-kartot · data-v-meklet · data-v-kopet · data-v-parole · data-v-simboli</p>
+    <h2>Dati un formas</h2>
+
+    <div class="lauks mt-m">
+      <label class="etiķete" for="mekl">Meklēt tabulā (bez garumzīmēm — "riga" atrod "Rīga")</label>
+      <input id="mekl" class="ievade" type="search" placeholder="Meklēt pilsētu…" data-v-meklet="#pilsetas">
+    </div>
+    <div class="tabula--apmale mt-m" style="overflow-x:auto">
+      <table class="tabula tabula--svītraina" id="pilsetas" data-v-kartot>
+        <thead><tr><th>Pilsēta</th><th>Iedzīvotāji</th><th>Dibināta</th></tr></thead>
+        <tbody>
+          <tr><td>Rīga</td><td>605 802</td><td>1201</td></tr>
+          <tr><td>Daugavpils</td><td>80 427</td><td>1275</td></tr>
+          <tr><td>Liepāja</td><td>67 936</td><td>1625</td></tr>
+          <tr><td>Jelgava</td><td>54 044</td><td>1265</td></tr>
+          <tr><td>Jūrmala</td><td>49 325</td><td>1920</td></tr>
+          <tr><td>Ventspils</td><td>31 301</td><td>1378</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="palīgteksts mt-s">Klikšķini uz kolonnas virsraksta, lai kārtotu.</p>
+
+    <div class="režģis režģis--2 mt-l">
+      <div class="lauks">
+        <label class="etiķete" for="pw">Parole</label>
+        <div class="ievades-grupa">
+          <input id="pw" class="ievade" type="password" value="slepenaparole">
+          <button type="button" class="ievades-grupa__poga" data-v-parole="#pw">Rādīt</button>
+        </div>
+      </div>
+      <div class="lauks">
+        <label class="etiķete" for="zin">Ziņa <span id="zin-sk" class="palīgteksts"></span></label>
+        <textarea id="zin" class="ievade" maxlength="120" data-v-simboli="#zin-sk" placeholder="Maks. 120 rakstzīmes"></textarea>
+      </div>
+    </div>
+
+    <div class="paraugs mt-l rinda rinda--centrā rinda--ietīt">
+      <code id="uzstadisana">npm install vitaly-css</code>
+      <button class="poga poga--klusā poga--maza" data-v-kopet="#uzstadisana">Kopēt</button>
+      <button class="poga poga--klusā poga--maza" data-v-kopet="https://piemers.lv" data-v-kopets="Saite nokopēta ✓">Kopēt saiti</button>
+    </div>
+  </section>
+
+  <section class="sadaļa" style="border:0">
+    <p class="birka">JavaScript API</p>
+    <h2>Ja tomēr vajag no koda</h2>
+    <div class="kods">Vitaly.pazinot('Sveiki!', { veids: 'labi', ilgums: 3000 });
+Vitaly.atvertLogu('#logs1');
+Vitaly.atvertPaneli('#panelis');
+document.addEventListener('v:cilne', e =&gt; console.log(e.detail.poga));</div>
+    <button class="poga poga--pamata mt-m" onclick="Vitaly.pazinot('Sveiki no JS API!', {veids:'labi'})">Izmēģināt API</button>
+  </section>
+
+</main>
+
+<button class="uz-augšu" data-v-uz-augsu aria-label="Uz augšu">↑</button>
+
+<footer class="kājene-lapa"><div class="saturs">© VitalyCSS + VitalyJS</div></footer>
+
+<script src="../dist/vitaly.js"></script>
+</body>
+</html>

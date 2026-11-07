@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="lv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalyCSS — Demonstrācija</title>
+  <link rel="stylesheet" href="../dist/vitaly.css">
+  <style>
+    /* ═══ Pielāgotās krāsas — MAINIET ŠO! ═══ */
+    :root {
+      --vitaly-pamata: #1a6b4a;
+      --vitaly-pamata-gaiss: #2d9c6e;
+      --vitaly-pamata-tumss: #0f4a32;
+      --vitaly-akcents: #e8a020;
+    }
+
+    /* Demo lapa stili */
+    body {
+      min-height: 100vh;
+    }
+
+    .demo-sadaļa {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--vitaly-mala);
+    }
+
+    .demo-virsraksts {
+      font-family: var(--vitaly-fonts-kods);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--vitaly-pamata-teksts);
+      margin-bottom: 0.5rem;
+    }
+
+    .paraugs {
+      background: var(--vitaly-fons-klusums);
+      border: 1px solid var(--vitaly-mala);
+      border-radius: var(--vitaly-noapaļ);
+      padding: var(--vitaly-attālums-l);
+      margin-top: var(--vitaly-attālums-m);
+    }
+
+    .kods-bloks {
+      background: #1c1c1e;
+      color: #a8d8b0;
+      padding: var(--vitaly-attālums-l);
+      border-radius: var(--vitaly-noapaļ);
+      font-family: var(--vitaly-fonts-kods, monospace);
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin-top: var(--vitaly-attālums-m);
+    }
+
+    .kods-bloks .koms {
+      color: #6a9f76;
+    }
+
+    .kods-bloks .atsl {
+      color: #7baee0;
+    }
+
+    .kods-bloks .vērt {
+      color: #e8c98a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ NAVIGĀCIJA ═══ -->
+  <nav class="josla">
+    <a href="#" class="zīmols">VitalyCSS</a>
+    <ul class="saraksts-nav">
+      <li><a href="#krāsas">Krāsas</a></li>
+      <li><a href="#pogas">Pogas</a></li>
+      <li><a href="#formas">Formas</a></li>
+      <li><a href="#kartes">Kartes</a></li>
+      <li><a href="#" class="aktīvs">Dokumentācija</a></li>
+      <li><a href="#"><button class="poga poga--pamata poga--maza">Lejupielādēt</button></a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ VIRSRAKSTS ═══ -->
+  <header
+    style="padding: 5rem 0 4rem; text-align: center; background: var(--vitaly-fons-kartes); border-bottom: 1px solid var(--vitaly-mala);">
+    <div class="saturs saturs--šaurs">
+      <span class="nozīme nozīme--pamata mb-m" style="display:inline-flex;">v1.0.0</span>
+      <h1 style="margin-bottom: 1rem;">VitalyCSS</h1>
+      <p style="font-size: 1.25rem; color: var(--vitaly-teksts-gaiss); max-width: 540px; margin: 0 auto 2rem;">
+        Viegls CSS ietvars ar latviskām klasēm. Balstīts uz Pico CSS filozofiju —
+        minimāls, bet pilnīgs.
+      </p>
+      <div class="rinda rinda--centrā" style="justify-content:center; gap: 1rem;">
+        <button class="poga poga--pamata poga--liela">Sākt lietot</button>
+        <button class="poga poga--kontūra poga--liela">GitHub</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="saturs">
+
+      <!-- ═══ KRĀSU PIELĀGOŠANA ═══ -->
+      <section class="demo-sadaļa" id="krāsas">
+        <p class="demo-virsraksts">§ Krāsas</p>
+        <h2>Pielāgojiet savas krāsas</h2>
+        <p>Pārrakstiet CSS mainīgos <code>:root</code> blokā jebkurā savā stillapā:</p>
+
+        <div class="kods-bloks">
+          <span class="koms">/* Jūsu projekta CSS fails */</span>
+          <span class="atsl">:root</span> {
+          <span class="atsl">--vitaly-pamata</span>: <span class="vērt">#1a6b4a</span>; <span class="koms">/* Galvenā
+            krāsa */</span>
+          <span class="atsl">--vitaly-pamata-gaiss</span>: <span class="vērt">#2d9c6e</span>;
+          <span class="atsl">--vitaly-pamata-tumss</span>: <span class="vērt">#0f4a32</span>;
+          <span class="atsl">--vitaly-akcents</span>: <span class="vērt">#e8a020</span>; <span class="koms">/*
+            Izcelšanai */</span>
+          <span class="atsl">--vitaly-fons</span>: <span class="vērt">#f8f7f4</span>; <span class="koms">/* Lapas fons
+            */</span>
+          <span class="atsl">--vitaly-fonts</span>: <span class="vērt">"Jūsu Fonts"</span>, serif;
+          }
+        </div>
+
+        <div class="paraugs">
+          <div class="režģis režģis--4" style="gap: 1rem;">
+            <div
+              style="background: var(--vitaly-pamata); height:80px; border-radius: var(--vitaly-noapaļ); display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;">
+              --pamata</div>
+            <div
+              style="background: var(--vitaly-akcents); height:80px; border-radius: var(--vitaly-noapaļ); display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;">
+              --akcents</div>
+            <div
+              style="background: var(--vitaly-briesmas); height:80px; border-radius: var(--vitaly-noapaļ); display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;">
+              --briesmas</div>
+            <div
+              style="background: var(--vitaly-labi); height:80px; border-radius: var(--vitaly-noapaļ); display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;">
+              --labi</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ POGAS ═══ -->
+      <section class="demo-sadaļa" id="pogas">
+        <p class="demo-virsraksts">§ Pogas</p>
+        <h2>Pogu varianti</h2>
+
+        <div class="paraugs kaudze">
+          <div class="rinda rinda--centrā rinda--ietīt">
+            <button class="poga poga--pamata">Pamata</button>
+            <button class="poga poga--akcents">Akcents</button>
+            <button class="poga poga--kontūra">Kontūra</button>
+            <button class="poga poga--klusā">Klusa</button>
+            <button class="poga poga--briesmas">Briesmas</button>
+          </div>
+          <div class="rinda rinda--centrā rinda--ietīt">
+            <button class="poga poga--pamata poga--maza">Maza</button>
+            <button class="poga poga--pamata">Vidēja</button>
+            <button class="poga poga--pamata poga--liela">Liela</button>
+            <button class="poga poga--pamata" disabled>Atspējota</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FORMAS ═══ -->
+      <section class="demo-sadaļa" id="formas">
+        <p class="demo-virsraksts">§ Formas</p>
+        <h2>Formas elementi</h2>
+
+        <div class="paraugs">
+          <div class="režģis režģis--2">
+            <div class="lauks">
+              <label class="etiķete etiķete--obligāts">Vārds</label>
+              <input type="text" class="ievade" placeholder="Jūsu vārds">
+            </div>
+            <div class="lauks">
+              <label class="etiķete">E-pasts</label>
+              <input type="email" class="ievade" placeholder="vards@piemers.lv">
+              <span class="palīgteksts">Mēs nelietosim to reklāmām.</span>
+            </div>
+            <div class="lauks">
+              <label class="etiķete">Valsts</label>
+              <select class="ievade">
+                <option>Latvija</option>
+                <option>Lietuva</option>
+                <option>Igaunija</option>
+              </select>
+            </div>
+            <div class="lauks">
+              <label class="etiķete etiķete--obligāts">Parole</label>
+              <input type="password" class="ievade ievade--kļūda" placeholder="••••••••">
+              <span class="kļūdas-teksts">Parole ir par īsu.</span>
+            </div>
+            <div class="lauks" style="grid-column: 1/-1;">
+              <label class="etiķete">Ziņojums</label>
+              <textarea class="ievade" placeholder="Rakstiet šeit..."></textarea>
+            </div>
+            <div style="grid-column: 1/-1;" class="kaudze atstarpe-s">
+              <label class="izvēlne">
+                <input type="checkbox" checked> Piekrītu noteikumiem
+              </label>
+              <label class="izvēlne">
+                <input type="radio" name="tips"> Privātpersona
+              </label>
+              <label class="izvēlne">
+                <input type="radio" name="tips"> Uzņēmums
+              </label>
+            </div>
+            <div style="grid-column: 1/-1;">
+              <button class="poga poga--pamata">Nosūtīt</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ KARTES ═══ -->
+      <section class="demo-sadaļa" id="kartes">
+        <p class="demo-virsraksts">§ Kartes</p>
+        <h2>Satura kartes</h2>
+
+        <div class="režģis režģis--3 mt-m">
+          <div class="karte karte--virsma">
+            <div class="karte__attēls"
+              style="background: linear-gradient(135deg, var(--vitaly-pamata), var(--vitaly-akcents)); height: 140px;">
+            </div>
+            <div class="karte__saturs">
+              <div class="nozīme nozīme--pamata mb-s">Jaunumi</div>
+              <h3 class="karte__virsraksts">VitalyCSS izlaists</h3>
+              <p class="karte__apraksts">Latvijas pirmais CSS ietvars ar pilnībā latviskām klasēm un CSS mainīgajiem.
+              </p>
+              <button class="poga poga--pamata poga--maza">Lasīt vairāk</button>
+            </div>
+            <div class="karte__kājene">
+              <span class="teksts--kluss teksts--mazs">12. janvāris, 2025</span>
+              <span class="nozīme nozīme--klusa">5 min</span>
+            </div>
+          </div>
+
+          <div class="karte karte--virsma">
+            <div class="karte__attēls" style="background: linear-gradient(135deg, #6c3483, #2980b9); height: 140px;">
+            </div>
+            <div class="karte__saturs">
+              <div class="nozīme nozīme--uzmanies mb-s">Padoms</div>
+              <h3 class="karte__virsraksts">Krāsu sistēma</h3>
+              <p class="karte__apraksts">Kā efektīvi izmantot CSS mainīgos dinamiskai tēmas maiņai.</p>
+              <button class="poga poga--kontūra poga--maza">Lasīt vairāk</button>
+            </div>
+            <div class="karte__kājene">
+              <span class="teksts--kluss teksts--mazs">8. janvāris, 2025</span>
+              <span class="nozīme nozīme--klusa">3 min</span>
+            </div>
+          </div>
+
+          <div class="karte karte--virsma">
+            <div class="karte__attēls" style="background: linear-gradient(135deg, #c0392b, #e67e22); height: 140px;">
+            </div>
+            <div class="karte__saturs">
+              <div class="nozīme nozīme--labi mb-s">Apmācība</div>
+              <h3 class="karte__virsraksts">Režģa sistēma</h3>
+              <p class="karte__apraksts">Izkārtojuma veidošana ar .režģis un .rinda klasēm ātri un viegli.</p>
+              <button class="poga poga--klusā poga--maza">Lasīt vairāk</button>
+            </div>
+            <div class="karte__kājene">
+              <span class="teksts--kluss teksts--mazs">3. janvāris, 2025</span>
+              <span class="nozīme nozīme--klusa">7 min</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ ZIŅAS ═══ -->
+      <section class="demo-sadaļa">
+        <p class="demo-virsraksts">§ Ziņojumi</p>
+        <h2>Sistēmas ziņojumi</h2>
+        <div class="kaudze mt-m">
+          <div class="ziņa ziņa--info">ℹ️ <strong>Informācija.</strong> Jūsu pieteikums tiek apstrādāts.</div>
+          <div class="ziņa ziņa--labi">✓ <strong>Veiksmīgi!</strong> Dati saglabāti.</div>
+          <div class="ziņa ziņa--uzmanies">⚠️ <strong>Uzmanību!</strong> Sesija beigsies pēc 5 minūtēm.</div>
+          <div class="ziņa ziņa--briesmas">✗ <strong>Kļūda.</strong> Lūdzu, pārbaudiet formas laukus.</div>
+        </div>
+      </section>
+
+      <!-- ═══ TABULA ═══ -->
+      <section class="demo-sadaļa">
+        <p class="demo-virsraksts">§ Tabulas</p>
+        <h2>Datu tabulas</h2>
+        <div class="tabula--apmale mt-m" style="overflow-x:auto;">
+          <table class="tabula tabula--svītraina">
+            <thead>
+              <tr>
+                <th>Klase</th>
+                <th>Apraksts</th>
+                <th>Tips</th>
+                <th>Statuss</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>.poga</code></td>
+                <td>Pogu pamata stils</td>
+                <td><span class="nozīme nozīme--klusa">Komponents</span></td>
+                <td><span class="nozīme nozīme--labi">Aktīvs</span></td>
+              </tr>
+              <tr>
+                <td><code>.karte</code></td>
+                <td>Satura karte</td>
+                <td><span class="nozīme nozīme--klusa">Komponents</span></td>
+                <td><span class="nozīme nozīme--labi">Aktīvs</span></td>
+              </tr>
+              <tr>
+                <td><code>.režģis</code></td>
+                <td>CSS Grid izkārtojums</td>
+                <td><span class="nozīme nozīme--pamata">Izkārtojums</span></td>
+                <td><span class="nozīme nozīme--labi">Aktīvs</span></td>
+              </tr>
+              <tr>
+                <td><code>.aizkars</code></td>
+                <td>Modāla loga fons</td>
+                <td><span class="nozīme nozīme--klusa">Komponents</span></td>
+                <td><span class="nozīme nozīme--uzmanies">Beta</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══ NOZĪMES ═══ -->
+      <section class="demo-sadaļa">
+        <p class="demo-virsraksts">§ Nozīmes</p>
+        <h2>Nozīmes un birkas</h2>
+        <div class="rinda rinda--ietīt mt-m">
+          <span class="nozīme nozīme--pamata">Pamata</span>
+          <span class="nozīme nozīme--akcents">Akcents</span>
+          <span class="nozīme nozīme--klusa">Klusa</span>
+          <span class="nozīme nozīme--labi">Labi</span>
+          <span class="nozīme nozīme--uzmanies">Uzmanies</span>
+          <span class="nozīme nozīme--briesmas">Briesmas</span>
+        </div>
+      </section>
+
+      <!-- ═══ IELĀDE ═══ -->
+      <section class="demo-sadaļa">
+        <p class="demo-virsraksts">§ Animācijas</p>
+        <h2>Ielādes indikators</h2>
+        <div class="rinda rinda--centrā mt-m">
+          <div class="grieznis"></div>
+          <span class="teksts--kluss">Ielādē...</span>
+        </div>
+      </section>
+
+    </div><!-- /saturs -->
+  </main>
+
+  <!-- ═══ KĀJENE ═══ -->
+  <footer class="kājene-lapa">
+    <div class="saturs rinda rinda--starp rinda--centrā">
+      <span>© 2025 VitalyCSS — Latvijas CSS ietvars</span>
+      <span>MIT licence · <a href="#">GitHub</a></span>
+    </div>
+  </footer>
+
+</body>
+
+</html>
